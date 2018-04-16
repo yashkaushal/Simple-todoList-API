@@ -3,30 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VersionCheck.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace VersionCheck.Controllers
 {
     [Route("api/[controller]")]
-    public class VersionController : Controller
+    public class TodoController : Controller
     {
-
-        // get latest version number
         // GET: api/<controller>
         [HttpGet]
-        public string Get()
+        public JsonResult GetAll()
         {
-            return Models.Version.Number;
+            return Json(VersionCheck.Models.Todo.list);
         }
 
-        
-        // check if your version is latest
         // GET api/<controller>/5
-        [HttpGet("checkLatest/{ver}")]
-        public string Get(string ver)
+        [HttpGet("/u/{user}/{id}")]
+        public JsonResult Get(string user, int id)
         {
-            return ver == Models.Version.Number ? "Latest" : "obsolete";
+            return Json(from element in Todo.list where element.id == id && element.User == user select element);
         }
 
         // POST api/<controller>
@@ -42,9 +39,13 @@ namespace VersionCheck.Controllers
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("/u/{user}/{id}")]
+        public void Delete(string user, int id)
         {
+            foreach( Todo obj in (from element in Todo.list where element.id == id && element.User == user select element))
+            {
+                Todo.list.Remove(obj);
+            }
         }
     }
 }

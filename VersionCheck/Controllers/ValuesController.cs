@@ -9,24 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace VersionCheck.Controllers
 {
     [Route("api/[controller]")]
-    public class VersionController : Controller
+    public class ValuesController : Controller
     {
-
-        // get latest version number
         // GET: api/<controller>
         [HttpGet]
-        public string Get()
+        public IEnumerable<string> Get()
         {
-            return Models.Version.Number;
+            return new string[] { "value1", "value2" };
         }
 
-        
-        // check if your version is latest
         // GET api/<controller>/5
-        [HttpGet("checkLatest/{ver}")]
-        public string Get(string ver)
+        [HttpGet("{id}")]
+        public string Get(int id)
         {
-            return ver == Models.Version.Number ? "Latest" : "obsolete";
+            return "value";
         }
 
         // POST api/<controller>
