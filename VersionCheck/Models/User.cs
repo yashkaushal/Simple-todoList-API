@@ -8,7 +8,7 @@ namespace VersionCheck.Models
     public class User
     {
         public static int NumberOfUsers { get; private set; } = 0;
-        public static List<User> list;
+        public static List<User> list = new List<User>();
 
         public int Id { get; private set; }
         public string Name { get;  set; }
