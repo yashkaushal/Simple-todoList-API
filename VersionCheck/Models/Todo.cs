@@ -8,7 +8,7 @@ namespace VersionCheck.Models
     public class Todo
     {
         public static int NumberOfTodo { get; private set; } = 0;
-        public static List<Todo> list;
+        public static List<Todo> list = new List<Todo>();
 
         public int id { get; private set; }
         public string Message;
