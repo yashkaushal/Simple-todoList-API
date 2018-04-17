@@ -13,6 +13,9 @@ namespace VersionCheck.Controllers
     public class TodoController : Controller
     {
         // GET: api/<controller>
+        /// <summary>
+        /// get all todo items in json format
+        /// </summary>
         [HttpGet]
         public JsonResult GetAll()
         {
@@ -20,6 +23,9 @@ namespace VersionCheck.Controllers
         }
 
         // GET api/<controller>/5
+        /// <summary>
+        /// get all todo items in json format
+        /// </summary>
         [HttpGet("/u/{user}/{id}")]
         public JsonResult Get(string user, int id)
         {
