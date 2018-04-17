@@ -14,8 +14,12 @@ namespace VersionCheck.Controllers
 
         // get latest version number
         // GET: api/<controller>
+        /// <summary>
+        /// Get latest version number
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public string Get()
+        public string GetLatestversionNumber()
         {
             return Models.Version.Number;
         }
@@ -23,28 +27,15 @@ namespace VersionCheck.Controllers
         
         // check if your version is latest
         // GET api/<controller>/5
+        /// <summary>
+        /// Matches the given version with latest version
+        /// </summary>
+        /// <param name="ver">version number(string)</param>
+        /// <returns>latest if versino matches or obsolete if they don't</returns>
         [HttpGet("checkLatest/{ver}")]
         public string Get(string ver)
         {
             return ver == Models.Version.Number ? "Latest" : "obsolete";
-        }
-
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

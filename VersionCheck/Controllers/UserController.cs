@@ -13,35 +13,42 @@ namespace VersionCheck.Controllers
     public class UserController : Controller
     {
         // GET: api/<controller>
+        /// <summary>
+        /// returns all users with user id in Json format
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public JsonResult GetAllUsers()
         {
-            return new string[] { "value1", "value2" };
+            return Json(Models.User.list);
         }
 
         // GET api/<controller>/5
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <param name="name">name of new user</param>
+        /// <returns></returns>
         [HttpGet("n/{name}")]
         public JsonResult Get(string name)
         {
             return Json(new User(name));
         }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         // DELETE api/<controller>/5
+        /// <summary>
+        /// remove user with particular user id
+        /// </summary>
+        /// <param name="id">user id</param>
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            foreach(User user in (from element in Models.User.list
+                                  where element.Id == id
+                                  select element))
+            {
+                Models.User.list.Remove(user);
+            }
         }
     }
 }
