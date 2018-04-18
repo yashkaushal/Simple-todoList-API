@@ -42,6 +42,18 @@ namespace VersionCheck.Controllers
             return Json(from element in Todo.list where element.id == id && element.User == user select element);
         }
 
+        // GET api/<controller>/5
+        /// <summary>
+        /// get todo item of a particular user name
+        /// </summary>
+        /// <param name="user">name of user</param>
+        /// <returns></returns>
+        [HttpGet("u/{user}")]
+        public JsonResult GetTodoOfUser(string user)
+        {
+            return Json(from element in Todo.list where element.User == user select element);
+        }
+
         /// <summary>
         /// Create a new todo
         /// </summary>
